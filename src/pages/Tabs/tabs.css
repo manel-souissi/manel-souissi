@@ -1,0 +1,167 @@
+/* Set the width to the full container and center the content */
+ion-select {
+    width:30%;
+  
+    justify-content: center;
+  }
+  
+  /* Set the flex in order to size the text width to its content */
+  ion-select::part(placeholder),
+  ion-select::part(text) {
+    flex: 0 0 auto;
+  }
+  
+  /* Set the placeholder color and opacity */
+  ion-select::part(placeholder) {
+    color: #a891a3;
+    opacity: 1;
+  }
+  
+  /*
+   * Set the font of the first letter of the placeholder
+   * Shadow parts work with pseudo-elements, too!
+   * https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements
+   */
+  ion-select::part(placeholder)::first-letter {
+    font-size: 24px;
+    font-weight: 50;
+  }
+  
+  /* Set the text color */
+  ion-select::part(text) {
+    color: #545ca7;
+  }
+  
+  /* Set the icon color and opacity */
+  ion-select::part(icon) {
+    color: #971e49;
+    opacity: 1;
+  }
+
+ion-title{
+  color: hsl(234, 33%, 49%);}
+  
+ion-content{
+  background:#6b6767;
+}
+
+
+  ion-title::first-letter {
+    font-size: 100px;
+    font-weight: 50;
+  }
+  ion-title{
+    width:90%;
+  text-align: center;
+    justify-content: center;
+  }
+ 
+  /* Set the flex in order to size the text width to its content */
+  
+  ion-title{
+    flex: 0 0 auto;
+  }
+  
+  /* Set the placeholder color and opacity */
+  ion-title{
+    color: #a891a3;
+    opacity: 5;
+  }
+  .image{
+    position:relative;
+    width:100%;
+    padding: 0px;
+    max-width:85vw;
+    height:100%;
+    border-radius:50vw;
+    transition: 0.1s;
+
+background:transparent;
+
+
+  }
+  .input{
+    flex:1;
+    border: none;
+    padding:10px;
+  }
+  .cards{
+    text-align: center;
+    position:relative;
+    width:30vh;
+    padding: 0px;
+    max-width:85vw;
+    height:15vh;
+    border-radius:50vw;
+    box-shadow: 0px 10px 30px 0px rgba(180, 116, 116, 0.9);
+    transition: 0.1s;
+background: #b1698b;
+background:transparent;
+float: left;
+}
+.border{
+  border-top: 1px solid rgb(71, 66, 66);
+  background:#464242e6;
+  width: fit-content;
+  max-width: 30vw;
+ 
+}
+.text{
+  position: absolute;
+  z-index: 999;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 25%; /* Adjust this value to move the positioned div up and down */
+  text-align: center;
+  width: 65%; /* Set the width of the positioned div */
+}
+.container{
+  position: relative;
+ display: inline-block;
+}
+.img{
+  border-radius:1vw;
+ 
+}
+.slid{ text-align: center;
+  font-size: 18px;
+  background: #fff;
+  width: 80%;
+
+  /* Center slide text vertically */
+ 
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding:0px;}
+
+.slide{
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  top: 0%;
+  height:40vh;
+}
+.ig{
+  left: 0;
+  right: 0;
+  position:relative;
+  width:100%;
+  padding:0px;
+  max-width:85vw;
+  top: 1%;
+
+}

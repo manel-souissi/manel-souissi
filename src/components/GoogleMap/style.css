@@ -1,0 +1,74 @@
+.GeoMap {
+    width: 100vw;
+    height: 100vw;
+}
+
+.geoFooter {
+    position: absolute;
+    bottom: 0;
+    /* margin: auto; */
+    left: 0;
+    right: 0;
+    margin: 16px;
+}
+
+.geoAbs {
+    position: absolute;
+    bottom: 40px;
+    /* margin: auto; */
+    left: 0;
+    right: 0;
+    margin: 16px;
+}
+.pointer {
+    border-top: 20px solid red;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    position: absolute;
+    bottom: -18px;
+}
+.full-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search{
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
+}
+.locate{
+    position: absolute;
+    bottom: 2rem;
+    right: 90%;
+    background:none ;
+
+}
+.back{
+    position: absolute;
+    bottom: 4rem;
+    left: 90%;
+    background:none ;
+
+}
+ .imageee{
+
+    width: 40px;
+    cursor: pointer;
+    position:relative;
+    padding: 0px;
+    max-width:40vw;
+    height:50%;
+    border-radius:90vw;
+    transition: 0.1s;
+    bottom: 0rem;
+    left: 10%;
+background:transparent;
+
+
+  }

@@ -1,0 +1,7 @@
+{
+  "name": "Newsy-Application-course",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

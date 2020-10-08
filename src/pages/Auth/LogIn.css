@@ -1,0 +1,19 @@
+ 
+ 
+ .logincontent {
+  --ion-background-color: linear-gradient(#e66465, #9198e5);
+}
+.itemlogin{
+  --ion-background-color: transparent!important;
+}
+.padding{
+  padding: 5%;
+}
+
+   .logo  ion-icon {
+ vertical-align: center;
+position: absolute;
+font-size: 9em;
+height:250px;
+  position: relative ;
+}

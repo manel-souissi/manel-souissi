@@ -1,0 +1,50 @@
+.card{
+    
+    position:relative;
+    width:20vh;
+    padding: 0px;
+    max-width:35vw;
+    height:20vh;
+    border-radius:50vw;
+    transition: 0.1s;
+background: #b1698b;
+background:transparent;
+
+}
+.text{
+    text-underline-position: above;
+    color: #bdb2b2;
+font-size-adjust: initial;
+padding-block-start: 50px;
+font-size: 15px;
+}
+.logo  ion-icon {
+   vertical-align: middle;
+   position: absolute;
+   font-size: 6em;
+   height:30px;
+     position: relative;
+     color: rgb(118, 131, 145);
+     padding-block-start:0px;
+   }
+   .content {
+    --ion-background-color:  #6f6e72; 
+    background:transparent;
+  }
+  .img {
+    --ion-background-color: linear-gradient(#424242, #9198e5);  
+      background: transparent;
+      padding: 0px;
+      box-shadow: 0px 10px 30px 0px  rgb(86, 95, 104);
+
+     
+
+   
+  }table, th, td {
+    border-radius:1px;
+    padding: 15px;
+  }
+  .row1{
+    color: white;
+  background-color: rgb(133, 81, 120);
+  }

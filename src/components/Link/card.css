@@ -1,0 +1,46 @@
+.ioncard{
+    
+        position:relative;
+        width:22vh;
+        padding: 0px;
+        max-width:85vw;
+        height:fit-content;
+        border-radius:1vw;
+        transition: 0.1s;
+        float: left;
+        background:transparent;
+}
+.tex{
+position: absolute;
+
+  left: 0;
+  right:0;
+  top: 60%; /* Adjust this value to move the positioned div up and down */
+  width: 65%; /* Set the width of the positioned div */
+  color:lightblue;
+  text-align-last: left;
+
+}
+.imag{
+        position:relative;
+        width:30vh;
+        padding:0px;
+        height:30vh;
+        
+    
+    background:transparent;
+    
+    
+      }
+      .borde{
+        border-top: 1px solid rgb(70, 64, 64);
+        background:rgba(87, 83, 83, 0.9);
+        width: fit-content;
+        max-width: 50vw;
+        border-radius:1vw;
+        padding: 5px;
+
+      }
+
+
+   
