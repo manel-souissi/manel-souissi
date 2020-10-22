@@ -7,9 +7,12 @@ import { IonPage, IonContent,IonFabButton,IonFab ,IonIcon, IonSlide, IonSlides ,
 import SmallHeader from "../../components/Header/SmallHeader";
 import LargeHeader from "../../components/Header/LargeHeader";
 import LinkList from "../../components/Link/LinkList";
+import UserContext from "../../contexts/UserContext";
+
 const Home = (props) => {
   
- 
+  const { user } = React.useContext(UserContext);
+
   const slideOpts = {
 
     spaceBetween: 10,
@@ -34,6 +37,10 @@ const Home = (props) => {
       <IonContent fullscreen>
         <LargeHeader title="HOME" />
 
+        <>
+        {user ? (
+       <>
+
         <IonFab vertical="bottom" horizontal="bottom" slot="fixed">
           <IonFabButton>
             <IonIcon icon={add} />
@@ -48,7 +55,19 @@ const Home = (props) => {
           <IonFabList side="end">
             <IonButton  shape="round"  routerLink="/giveAway"> giveaway</IonButton>
           </IonFabList>
-        </IonFab>  
+        </IonFab>   </>
+        ) : (
+
+
+<IonFab vertical="bottom" horizontal="bottom" slot="fixed" >
+<IonFabButton  routerLink={"/login"}>
+  <IonIcon icon={add} />
+</IonFabButton></IonFab >
+)}
+</>
+
+
+
         <IonSlides   options={slideOpts} className="slide">
       <IonSlide >
       <img  className="ig" src=  "https://www.moneymagpie.com/wp-content/uploads/2012/06/MoneyMagpie_Items-For-Sale-Sell-Your-Stuff-Sign-e1491387817897.jpg" alt="img"/>

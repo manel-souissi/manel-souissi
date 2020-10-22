@@ -59,6 +59,7 @@ import UserContext from "./contexts/UserContext";
  import Categories from "../src/Admin/Categories";
  import Reclamer from "../src/reclamation/reclamer";
  import Complaintprocessing from "../src/reclamation/Complaintprocessing";
+ import Order from "../src/pages/Tabs/Order";
 
   import NewReclamtion from "../src/reclamation/newReclamtion";
   import AdminDasboard from "../src/Admin/adminPanel";
@@ -94,9 +95,10 @@ const App = () => {
               <Route path="/categories" component={Categories} />
               <Route path="/screen/:id" component={MsgScreen} />
               <Route path="/processing/:id" component={Complaintprocessing} />
+              <Route path="/order/:id" component={Order} />
 
                <Route path="/userpofile/:id" component={Userpofile} />
-              <Route path="/trending" component={Trending} />
+              <Route path="/Notifications" component={Trending} />
               <Route path="/submit" component={Submit} />
               <Route path="/giveAway" component={Submitt} />
               <Route path="/search" component={Search} />

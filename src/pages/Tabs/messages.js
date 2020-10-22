@@ -1,12 +1,13 @@
 import React ,{useState,useEffect} from "react";
-import {
-
-} from "ionicons/icons";
+import { personCircleOutline } from "ionicons/icons";
 import { IonPage, IonContent,IonList,IonListHeader, IonItem, 
   IonRow,
   IonCol,
   IonButton,
   IonGrid,
+  IonIcon,
+  IonLabel,
+  IonTitle,
   } from "@ionic/react";
 //import LargeHeader from "../../components/Header/LargeHeader";
 import firebase from "../../database/firebase";
@@ -98,12 +99,16 @@ if(user){
       {user ? (
            <>
       <IonListHeader>
-          Recent Conversations
+      <IonTitle> Discussions</IonTitle>
         </IonListHeader>
         {messages.map((messages) => (
         <IonList key={messages.id} >
         <IonItem    routerLink={`/screen/${messages?.id}`} button>
-            <p >{messages.text} </p>
+
+        <IonIcon icon={personCircleOutline} slot="start"/>
+ <IonLabel>
+        <h2 >{messages.user1name} </h2>
+            <p >{messages.text} </p> </IonLabel>
       
          </IonItem>
     
@@ -113,7 +118,10 @@ if(user){
  {message.map((messages) => (
         <IonList key={messages.id} >
         <IonItem    routerLink={`/screen/${messages?.id}`} button>
-            <p >{messages.text} </p>
+        <IonIcon icon={personCircleOutline} slot="start"/>
+        <IonLabel>
+        <h2 >{messages.user2name} </h2>
+            <p >{messages.text} </p></IonLabel>
       
          </IonItem>
     

@@ -10,7 +10,7 @@ import {
   IonInput,
   IonRow,
   IonCol,
-  IonButton,IonSelect,IonSelectOption ,IonHeader,IonTitle, IonToolbar,IonImg
+  IonButton,IonSelect,IonSelectOption ,IonHeader,IonTitle, IonToolbar,IonImg, IonText, IonCard, IonCardContent
 } from "@ionic/react";
 import SmallHeader from "../../components/Header/SmallHeader";
 import LargeHeader from "../../components/Header/LargeHeader";
@@ -34,7 +34,7 @@ const INITIAL_STATE = {
 };
 
 const Submit = (props) => {
-  const [cat, setCat] =  React.useState('');
+  const [cat, setCat] =  React.useState('athor');
 const [categories, setCategorie] = React.useState([]);
   const { user } = React.useContext(UserContext);
   const { Camera } = Plugins;
@@ -43,15 +43,16 @@ const [categories, setCategorie] = React.useState([]);
     validateCreateLink,
     handleCreateLink
   );
-  const [fileUrl, setFileUrl] = React.useState(null);
+ // const [fileUrl, setFileUrl] = React.useState(null);
+  const { Geolocation } = Plugins;
 
-  const onFileChange = async (e) => {
+ /* const onFileChange = async (e) => {
   const file =  e.target.files[0];
   const storageRef = firebase.app.storage().ref();
   const fileRef = storageRef.child(file.name);
   await fileRef.put(file);
   setFileUrl(await fileRef.getDownloadURL());
-}
+}*/
 const [imageUrl,setImage] =  React.useState(null);
 React.useEffect(() => {
   let isMounted = true;
@@ -76,7 +77,8 @@ React.useEffect(() => {
 
      
   
-      navigator.geolocation.getCurrentPosition((pos)=>{
+      //navigator.geolocation
+      Geolocation.getCurrentPosition((pos)=>{
         firebase.db.collection("posts").add({
           cordination:{lat:pos?.coords?.latitude,
             lng:pos?.coords?.longitude},
@@ -85,12 +87,12 @@ React.useEffect(() => {
           
           Price,
 
-          Type:"exchange/sell",
+          Type:"Sell",
           avatar:{avatar:imageUrl},
        
           category:cat,
         etat:"NEW",
-        userid: user.uid,
+        key: user.uid,
           posteBy: {
             id: user.uid,
             name: user.displayName,
@@ -133,7 +135,26 @@ async function takePicture() {
   }
        
      
-      
+  const [users,setUsers]=React.useState([]);
+  
+
+
+  React.useEffect(() => {
+    User();
+  },);
+
+  async function User() {
+   
+    if(user){
+      let document =  await firebase.db.collection('users').doc(user.uid)
+      document.get().then((doc) => {
+
+        setUsers({ ...doc.data(),
+           id: doc.id});
+    }
+   
+    );
+  }}    
    
   return (
     <IonPage>
@@ -142,32 +163,26 @@ async function takePicture() {
       <IonHeader><IonTitle  vertical="center" >exchange/sell</IonTitle>
         </IonHeader></IonToolbar>
       <IonContent fullscreen>
+
+
+
+
+
+
+
+
+
+      {users?.blocked === false && (
+         <> 
+       <>  
       {imageUrl!==null && (
       <IonImg style={{ 'border': '1px solid light', 'minHeight': '100px' }} src={imageUrl} alt="...." ></IonImg>)}
         <IonButton color="Medium" fill="outline" shape="round" onClick={takePicture}>take Picture</IonButton>
        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </> 
 
 
        
-        <IonItem lines="full">
-          
-          <input type="file" onChange={onFileChange} />  </IonItem>
       <IonItem lines="full">
           <IonLabel position="floating"> title </IonLabel>
           <IonInput
@@ -178,25 +193,6 @@ async function takePicture() {
           ></IonInput>
         </IonItem>
        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -212,8 +208,6 @@ async function takePicture() {
         </IonItem>
 
 
-      
-
         <IonItem>
             <IonLabel>categorie</IonLabel>
             <IonSelect value={cat} okText="Okay" cancelText="Dismiss" onIonChange={e => setCat(e.detail.value)}>
@@ -222,14 +216,6 @@ async function takePicture() {
               ))} 
                    </IonSelect>
           </IonItem>
-
-
-
-
-
-
-
-
 
 
 
@@ -267,8 +253,20 @@ async function takePicture() {
             </IonButton>
           </IonCol>
         </IonRow>
+        </>  )}
+        <>{users?.blocked === true && (
+          <IonCardContent><IonText color="danger">
+          <h5 > <p>Sorry !!</p> </h5>
+          <h4 > <p>you are not allowad to create post any more.</p > </h4>
+        </IonText></IonCardContent> 
+         
+       )} </>
       </IonContent>
     </IonPage>
   );
 };
 export default Submit;
+/*
+        <IonItem lines="full">
+          
+          <input type="file" onChange={onFileChange} />  </IonItem> */

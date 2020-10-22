@@ -8,7 +8,7 @@ import {
   IonInput,
   IonRow,
   IonCol,
-  IonButton ,IonGrid,IonCard
+  IonButton ,IonGrid,IonCard, IonCardContent
 } from "@ionic/react";
 
 
@@ -119,7 +119,7 @@ const NewReclamtion = (props) => {
 
 
     <th>Claim by</th>
-    <th>type</th>
+    <th>Claim</th>
     <th> Action</th>
   </tr>
   {reclame.map((reclame) => ( 
@@ -127,10 +127,10 @@ const NewReclamtion = (props) => {
   
     <td> {reclame?.reclamerBy?.name}</td>
     <td>{reclame?.reclamtion}</td>
-    <td>       
-       <IonCard key={reclame?.id}  routerLink={`/processing/${reclame?.id}`}>
+    <td>
+       <IonButton size="small" routerLink={`/processing/${reclame?.id}`}>      
     complaint processing
-    </IonCard>
+    </IonButton>
 </td>
   </tr>
  ))}

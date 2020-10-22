@@ -1,10 +1,9 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
 import { IonTabs,
     IonTabBar,
     IonTabButton,
     IonIcon,
-    IonLabel, IonPage,IonRouterOutlet } from '@ionic/react';
+    IonLabel,IonRouterOutlet } from '@ionic/react';
 
 import {
   homeOutline,
@@ -12,7 +11,7 @@ import {
   chatbubbleOutline,
   mapOutline,
   personCircleOutline,
-  
+  notificationsOutline
 } from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
@@ -50,30 +49,28 @@ const Admin = () => {
          <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">
                 <IonIcon icon={homeOutline} />
-                <IonLabel>home</IonLabel>
               </IonTabButton>
-              
+             
+              <IonTabButton tab="Notifications" href="/Notifications">
+                <IonIcon icon={notificationsOutline} />
+              </IonTabButton>
              
               
 
               <IonTabButton tab="messages" href="/Messages">
                 <IonIcon icon={chatbubbleOutline} />
-                <IonLabel>Messages</IonLabel>
               </IonTabButton>
               
               <IonTabButton tab="categories" href="/categorie">
                 <IonIcon icon={gridOutline} />
-                <IonLabel>categories</IonLabel>
               </IonTabButton>
 
               
               <IonTabButton tab="map" href="/HomeView">
                 <IonIcon icon={mapOutline} />
-                <IonLabel>Serach</IonLabel>
               </IonTabButton>
               <IonTabButton tab="profile" href="/profile">
                 <IonIcon icon={personCircleOutline} />
-                <IonLabel>Profile</IonLabel>
               </IonTabButton>
             </IonTabBar>
           </IonTabs>

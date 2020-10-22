@@ -23,6 +23,7 @@ import {
   ComboboxOptionText,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import { Plugins } from '@capacitor/core';
 
 
 
@@ -62,7 +63,7 @@ React.useEffect(() => {
 }, [user])
 React.useEffect(() => {
  
-  const unsubscribe= firebase.db.collection("posts").orderBy("created", "desc").onSnapshot(handleSnapShot);
+  const unsubscribe= firebase.db.collection("posts").where("etat",'==',"NEW").onSnapshot(handleSnapShot);
   
 
   
@@ -222,10 +223,13 @@ export default function HomeView ()
 
 function Locate(){
    const { user } = React.useContext(UserContext);
+   const { Geolocation } = Plugins;
+
   return<button  className="locate"
    onClick={()=>{
      
-    navigator.geolocation.getCurrentPosition((pos)=>{
+    
+    Geolocation.getCurrentPosition((pos)=>{
       firebase.db.collection("location").doc(user.uid).set({
         cordination:{lat:pos?.coords?.latitude,
         lng:pos?.coords?.longitude},

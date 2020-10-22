@@ -117,7 +117,7 @@ else{
 
 
   if (document && document.exists) {
-    props.history.push("/Messages")
+    props.history.push(`/screen/${user.uid+post?.posteBy?.id}`)
     }
   
   else {
@@ -138,11 +138,22 @@ else{
     })
   
 //navigation.navigate('ChatRoom')
-props.history.push("/Messages")
+props.history.push(`/screen/${user.uid+post?.posteBy?.id}`)
 }
 }}
 }
-    
+   async function order(){
+      await firebase.db.collection('notification').add({
+        text:`${user.displayName} is waiting for your reply`,
+        createdAt: new Date().getTime(),
+        avatar:post && post?.avatar?.avatar,
+        key:post &&post?.id,
+        name:user.displayName,
+        from:"Orders",
+        keySnder:user.uid,
+        reciver:post?.posteBy?.id
+     })
+    }
   
 
 
@@ -179,7 +190,10 @@ props.history.push("/Messages")
            
                 
           <LinkItem post={post} />
-          
+          <IonButton expand="block"
+                  onClick={order}
+                  color="primary"
+                  fill="outline"> send Order</IonButton>
                      
        
 

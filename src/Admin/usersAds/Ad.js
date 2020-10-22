@@ -7,13 +7,13 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonButton,IonIcon,IonItem,IonToolbar,IonFab,IonFabButton,
+  IonButton,IonIcon,IonToolbar,IonFab,IonFabButton,
 
   IonButtons,
   IonBackButton,
-  IonHeader,IonInput,IonTitle
+  IonHeader,IonTitle
 } from "@ionic/react";
-
+import * as firebas from 'firebase/app'
 import {
   chatbubbleEllipsesSharp,sendSharp,trashOutline
 } from "ionicons/icons";
@@ -26,9 +26,9 @@ const Ad = (props) => {
   const id = props.match.params.id;
   const linkRef = firebase.db.collection("posts").doc(id);
  
-
-  const [input, setInput] = React.useState();
+  const [comment, setInput] = React.useState("");
   const [comments, setComments] = React.useState([]);
+
 
   
 
@@ -51,77 +51,53 @@ const Ad = (props) => {
 
 
 
+   
   React.useEffect(() => {
-    return () =>{ 
-   
-    Comment ();
-   
-    }
+    if (id){
+    const unsubscribe =
+    firebase.db.collection("posts").doc(id).collection('comments').orderBy('createdAt', 'desc')
+    .onSnapshot(eSnapShot);
+    
   
    
-    
-  }, )
-
-  function Comment(){   if (id){
-    firebase.db.collection("posts").doc(id).collection("comments").onSnapshot(snapshot => (
-    setComments(
-      snapshot.docs.map(doc => 
-          ({
-            id: doc.id,
-            text: doc.data().text,
-            name: doc.data().user.name
-          })
-      )
-  )
-  ))
-        }
+    return () => unsubscribe();
+  
+  }
+  }, [id])
+  
+  function eSnapShot(snapshot) {
+    const comments = snapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+    setComments(comments);
   }
 
 
   async function Send() {
 
   
-      if (!user) {
-        props.history.push("/login");
-      } else {
-        if(id){
-      linkRef.collection('comments').add({
-        text:input,
-        createdAt: new Date().getTime(),
-        user: {
-          id:user.uid,
-        name:user.displayName,
-          
-        }
-      });
-
-   
-      
-  }
-  setInput("")}}
-
- 
-
-  function handleAddVote() {
     if (!user) {
       props.history.push("/login");
     } else {
-      linkRef.get().then((doc) => {
-        if (doc.exists) {
-          const previousVote = doc.data().votes;
-          const vote = { votedBy: { id: user.uid, name: user.displayName } };
-          const updatedVotes = { ...previousVote, vote };
-          const voteCount = updatedVotes.lenght+1;
-          linkRef.update({ votes: updatedVotes,voteCount, });
-          setLink((prevState) => ({
-            ...prevState,
-            votes: updatedVotes,
-            voteCount: voteCount+1,
-          }));
-        }
-      });
-    }
-  }
+      if(id){
+    linkRef.collection('comments').add({
+      text:comment,
+      createdAt: firebas.firestore.FieldValue.serverTimestamp(),
+      user: {
+        id:user.uid,
+      name:user.displayName,
+        
+      }
+    });
+
+ 
+    
+}
+setInput("")}}
+
+
+ 
+
    
  
    
@@ -178,16 +154,22 @@ props.history.push("/Messages")
 
 
  
-function handleDeleteLink() {
+ function handleDeleteLink() {
     linkRef
       .delete()
       .then(() => {
-        console.log(`Document with ID ${post.id} deleted`);
+        firebase.db.collection('notification').add({
+          text:'your post deletetd by the Admin !!',
+          createdAt: new Date().getTime(),
+          avatar:post && post?.avatar?.avatar,
+          key:post && post?.posteBy.id
+
+       })
       })
       .catch((err) => {
         console.error("Error deleting document", err);
       });
-    props.history.push("/");
+    props.history.push("/AdsList");
   }
 
 
@@ -234,14 +216,7 @@ function handleDeleteLink() {
     
                 
           <LinkItem post={post} />
-          <IonButton 
-                    onClick={() => handleAddVote()}
-                    size="small"
-                  >Vote</IonButton>
-                  
-               
-                  <IonButton  routerLink={`/reclamer/${post.id}`} color="secondary"> edit
-          </IonButton>    
+            
        
 
 
@@ -259,48 +234,45 @@ function handleDeleteLink() {
 
 
 
-                  <div className='chatscreen-inpute' >
+                 
+          <form className='chatscreen-inpute' >
         
-                  <IonInput  value={input} onIonChange={event=>setInput(event.target.value)} 
-      className='chatscreen-inputfiled' placeholder="type new message..."  /> 
-                 <IonIcon onClick={Send}   className='inputButton' slot="icon-only" icon={sendSharp}  />
-   
-                </div> 
-   
-          </IonCol>
-              </IonRow>
-              
-            
-            </IonGrid>
+        <input type="text"  value={comment} 
+        onChange={(e)=>setInput(e.target.value)} 
+className="input" placeholder="type new message..."  /> 
+       <IonIcon onClick={Send}   className='inputButton' slot="icon-only" icon={sendSharp}  />
 
-            <IonFab vertical="center" horizontal="end" slot="fixed">
-          <IonFabButton onClick={handleButtonPress}>
-            <IonIcon icon={chatbubbleEllipsesSharp} />
-          </IonFabButton>
-        </IonFab>  
-          </>
-        )}
-          <div>
-           <IonGrid>  
-        
-            
- {comments.map((comment) => ( 
-   
-   <IonItem lines="none"  key={comment.id} className='chatscreen-message'>
+      </form> 
 
+</IonCol>
+    </IonRow>
+    
+  
+  </IonGrid>
 
-<p className="chatscreen-text"        >  
-           <span className="username"> {comment?.name}</span>
-            {comment?.text}</p>
-         
-       
+  <IonFab vertical="center" horizontal="end" slot="fixed">
+<IonFabButton onClick={handleButtonPress}>
+  <IonIcon icon={chatbubbleEllipsesSharp} />
+</IonFabButton>
+</IonFab>  
+</>
+)}
+<div>
+ <IonGrid>  
+
+  
+{comments.map((comment) => ( 
+
+<p   key={comment.id} className="chatscreen-text">  
+<span className="usernam"> {comment?.user.name}</span>
+<br/> {comment?.text}<br/>
+<span className="time">
 
 
-
-
-              </IonItem>
-              ))}
-              </IonGrid> </div>
+{new Date(comment&&comment?.createdAt?.toDate()).toUTCString()}</span>
+ </p>
+    ))}
+    </IonGrid> </div>
       </IonContent>
     </IonPage>
   );

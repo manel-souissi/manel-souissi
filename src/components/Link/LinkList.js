@@ -18,7 +18,7 @@ const Posts = (props) => {
  
    React.useEffect(() => {
  
-    const unsubscribe= firebase.db.collection("posts").orderBy("created", "desc").onSnapshot(handleSnapShot);
+    const unsubscribe= firebase.db.collection("posts").where("etat",'==',"NEW").onSnapshot(handleSnapShot);
     
   
     

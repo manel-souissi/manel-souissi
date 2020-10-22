@@ -8,10 +8,9 @@ import {
   IonInput,
   IonRow,
   IonCol,
-  IonButton,
+  IonButton,IonHeader,IonButtons,IonBackButton,IonToolbar, IonTitle
 } from "@ionic/react";
-import SmallHeader from "../components/Header/SmallHeader";
-import LargeHeader from "../components/Header/LargeHeader";
+
 import UserContext from "../contexts/UserContext";
 import firebase from "../database";
 import validateCreateLink from "../validators/validateCreateLink";
@@ -31,15 +30,7 @@ const Categories = (props) => {
     validateCreateLink,
     handleCreateLink
   );
-  const [fileUrl, setFileUrl] = React.useState(null);
-
-  const onFileChange = async (e) => {
-  const file =  e.target.files[0];
-  const storageRef = firebase.app.storage().ref();
-  const fileRef = storageRef.child(file.name);
-  await fileRef.put(file);
-  setFileUrl(await fileRef.getDownloadURL());
-}
+  
 
 
   function handleCreateLink() {
@@ -58,8 +49,7 @@ const Categories = (props) => {
 
       const newPost = {
         title,
-      
-        avatar:{avatar:fileUrl},
+    
         
        
        
@@ -72,13 +62,14 @@ const Categories = (props) => {
   }
   return (
     <IonPage>
-      <SmallHeader title="create new annonce" />
-      <IonContent fullscreen>
-        <LargeHeader title="annonce" />
-        <IonItem lines="full">
-          
-          <input type="file" onChange={onFileChange} />  </IonItem>
-      <IonItem lines="full">
+      <IonHeader>
+     <IonToolbar color="secondary">
+     <IonTitle>Add new Categorie  </IonTitle>
+                <IonButtons slot="start">
+                  <IonBackButton  color="tertiary" defaultHref="/adminDasboard" />
+                </IonButtons> </IonToolbar></IonHeader>
+                <IonContent fullscreen>
+        <IonItem>
           <IonLabel position="floating"> title </IonLabel>
           <IonInput
             name="title"

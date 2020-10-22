@@ -36,7 +36,7 @@ const Signup = (props) => {
   
     try {
       
-    await firebase.register(name,cin,email, password)
+    await firebase.register(name,cin,email,password)
         .then(() => {
       return firebase.db.collection('users').doc(firebase.auth.currentUser.uid)
         .set({
@@ -45,6 +45,7 @@ const Signup = (props) => {
             email:values.email,
             role:"member",
           blocked:false,
+          key:firebase.auth.currentUser.uid
 
         })
           })
@@ -79,7 +80,7 @@ const Signup = (props) => {
             value={values.name}
             onIonChange={handleChange}
             required
-          ></IonInput>
+          ></IonInput> </IonItem>
           
           <IonItem lines="full">
           <IonLabel position="floating">Cin number</IonLabel>
@@ -97,7 +98,7 @@ const Signup = (props) => {
 
 
 
-        </IonItem>
+      
         <IonItem lines="full">
           <IonLabel position="floating">Email</IonLabel>
           <IonInput

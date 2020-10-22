@@ -1,13 +1,11 @@
 import React,{useEffect,useState} from 'react';
 import firebase from "../database/firebase";
-import { IonPage, IonContent,IonHeader,IonButtons,IonBackButton,IonList,IonItem,IonToolbar, IonTitle } from "@ionic/react";
+import { IonPage, IonContent,IonHeader,IonButtons,IonBackButton,IonLabel,IonList,IonItem,IonToolbar, IonTitle, IonIcon } from "@ionic/react";
+import { personCircleOutline } from 'ionicons/icons';
 const Users = () => {
     const [users,setUsers]=useState([]);
 
-   /* React.useEffect(() => {
-      const unsubscribe = getLinks();
-      return () => unsubscribe();
-    },);*/
+ 
     useEffect(() => {
       let isMounted = true;
      
@@ -41,7 +39,15 @@ const Users = () => {
          {users.map((users) => (
        <IonList key={users?.id}>
            <IonItem   routerLink={`/userpofile/${users?.id}`}> 
-            {users.name}</IonItem>
+           <IonIcon icon={personCircleOutline} slot="start">
+          
+
+           </IonIcon>
+           <IonLabel>  <p>UserName</p>
+                      <strong> {users.name}</strong>
+                    
+                    </IonLabel>
+           </IonItem>
            </IonList> 
            
           ))}  

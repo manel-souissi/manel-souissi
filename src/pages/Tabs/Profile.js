@@ -11,11 +11,10 @@ import {
   IonCol,
   IonButton,
   IonGrid,
-  IonIcon,IonFab,IonFabButton,IonFabList,IonHeader,IonToolbar,IonButtons,IonBackButton
+  IonIcon,IonFab,IonFabButton,IonFabList,IonHeader,IonToolbar,IonButtons,IonBackButton, IonTitle
 } from "@ionic/react";
 import {
   arrowBackOutline} from "ionicons/icons";
-import LargeHeader from "../../components/Header/LargeHeader";
 import firebase from "../../database";
 import { toast } from "../../helpers/toast";
 import UserContext from "../../contexts/UserContext";
@@ -24,6 +23,9 @@ import UserAds from "../../components/Link/userAds";
 const Profile = (props) => {
   const { user } = React.useContext(UserContext);
   const [users,setUsers]=React.useState([]);
+  
+
+
   
   async function handleLogoutUser() {
     try {
@@ -66,6 +68,7 @@ const Profile = (props) => {
            {users?.role ==="member" && (
               <IonHeader>
               <IonToolbar color="secondary">
+              <IonTitle> Profile</IonTitle>  
                 <IonButtons slot="start">
                   <IonBackButton  color="tertiary" defaultHref="/" />
                 </IonButtons>
@@ -80,9 +83,10 @@ const Profile = (props) => {
         {users?.role ==="Admin" && (
 
 
+<>
 
-
-
+<IonToolbar color="secondary">
+<IonTitle> Profile</IonTitle>  </IonToolbar> 
 
 <IonFab vertical="top" horizontal="bottom" slot="fixed">
           <IonFabButton  fill="outline" > 
@@ -99,7 +103,7 @@ const Profile = (props) => {
             <IonButton  shape="round"  routerLink={"/home"}> home</IonButton>
           </IonFabList>
         </IonFab>  
-       
+        </> 
 
 )}    </>)}
 
@@ -155,6 +159,7 @@ const Profile = (props) => {
                 </IonButton>
               </IonCol>
             </IonRow>
+
             <UserAds location={props.location} />
   
           </>

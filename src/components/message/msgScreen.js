@@ -4,11 +4,11 @@ import UserContext from "../../contexts/UserContext";
 import {
   IonPage,
   IonContent,
- IonIcon,IonInput,IonToolbar,IonButtons,IonBackButton
+ IonIcon,IonInput,IonToolbar,IonButtons,IonBackButton, IonTitle
 } from "@ionic/react";
 import './screen.css';
 import {
-  sendSharp,
+  sendSharp, personCircleOutline,
 } from "ionicons/icons";
 
 
@@ -92,14 +92,29 @@ function handleSnapShot(snapshot) {
     <IonToolbar color="secondary">
         <IonButtons slot="start">
           <IonBackButton  color="tertiary" defaultHref="/home" />
-        </IonButtons> </IonToolbar>
+        </IonButtons>
+        <IonIcon icon={personCircleOutline} color="primary" slot="end"/>
+        <>
+        {messages.map((message) => (   
+           <IonTitle>
+          
+           {message?.user?.name !== user?.displayName  && (
+              <>
+       
+        {message?.user?.name}
+        </>
+        )}  </IonTitle> 
+
+        ))} </>
+
+         </IonToolbar>
           
      
       <IonContent >
      
       {messages.map((message) => (
         
-        
+      
           <div className='chatscreen-message'  key={message.id}>
 <p className={`chatscreen-text ${message?.user?.name===user?.displayName &&"chatscreen-textUser"}`}         >  
            <span className="username"> {message?.user?.name}</span>
@@ -108,14 +123,9 @@ function handleSnapShot(snapshot) {
            </div>
        
   
-    // <div className='chatscreen-message' >
-     //<p className='chatscreen-text' key={message.id}>  {message.text}</p>
-  
-    //</div>  
     
   
-            
-              
+       
       
       ))} 
             

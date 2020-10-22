@@ -16,7 +16,7 @@ position: absolute;
   left: 0;
   right:0;
   top: 60%; /* Adjust this value to move the positioned div up and down */
-  width: 65%; /* Set the width of the positioned div */
+  width: 90%; /* Set the width of the positioned div */
   color:lightblue;
   text-align-last: left;
 
@@ -36,7 +36,7 @@ position: absolute;
         border-top: 1px solid rgb(70, 64, 64);
         background:rgba(87, 83, 83, 0.9);
         width: fit-content;
-        max-width: 50vw;
+        max-width: 60vw;
         border-radius:1vw;
         padding: 5px;
 

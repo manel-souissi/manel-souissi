@@ -191,7 +191,7 @@ function Unblocked(){
     <IonPage>
     <IonHeader>
      <IonToolbar color="secondary">
-     <IonTitle> Users </IonTitle>
+     <IonTitle> User </IonTitle>
                 <IonButtons slot="start">
                   <IonBackButton  color="tertiary" defaultHref="/users" />
                 </IonButtons> </IonToolbar></IonHeader>
@@ -228,14 +228,16 @@ function Unblocked(){
      >
      set to Member
      </IonButton>)}
-     {users.blocked ==="false" && (
+
+
+     {users.blocked ===false && (
        <IonButton  
        type="submit" onClick={bloc} 
      >
      bloc user
      </IonButton>
           )}
-           {users.blocked ==="true" && (
+           {users.blocked ===true && (
 <IonButton  
        type="submit" onClick={Unblocked} 
      >

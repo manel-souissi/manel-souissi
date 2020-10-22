@@ -70,7 +70,7 @@ function handleSnapShot(snapshot) {
                icon={locateOutline}
                  
                 />       <strong >
-                {post?.Position}</strong></p></div> 
+                {post?.etat}</strong></p></div> 
       
 
    

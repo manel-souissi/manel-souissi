@@ -5,11 +5,9 @@ import { toast } from "../helpers/toast";
 
 import {
     IonPage,
-    IonGrid,
     IonCard,
     IonItem,IonButton,IonList
   } from "@ionic/react";
-import { Toast } from '@capacitor/core';
 
 
 
@@ -17,8 +15,7 @@ import { Toast } from '@capacitor/core';
 const Complaintprocessing = (props) => {
   
     const [reclame, setReclamation] = React.useState([]);
-    const [Ad, setAd] = React.useState([]);
-    const [users, setUser] = React.useState([]);
+    
     const id = props.match.params.id;
 
     React.useEffect(() => {
@@ -35,13 +32,26 @@ const Complaintprocessing = (props) => {
     obj[fieldName] = "done";
     
     async function Send() {
-     
+      var field = "etat";
+        var objc = {};
+        objc[field] = "done";
        await firebase.db.collection('notification').add({
           text:'WARNNIN!!,you have a claim about your ad please change your content or we will deletet it !',
           createdAt: new Date().getTime(),
-          avatar:reclame && reclame.reclamerAt?.avatar
+          avatar:reclame && reclame.reclamerAt?.avatar,
+          key:reclame && reclame.reclamerAt?.ownerId,
+         
        })
-          
+       .then(function() {
+        return firebase.db.collection("User_reclamation").doc(id).update(objc);
+       
+      })
+      .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error blocing document: ", error);
+      });
+
+      props.history.push("/NewReclamtion");  
       }
       async function handleDeleteLink() {
         let document =  await firebase.db.collection('posts')
@@ -69,38 +79,40 @@ try {
       }
 
     
-      async function userDelete() {
-
-       // db.collection("users").document(firebase.auth.getInstance().currentUser.idd).delete()
-//.addOnSuccessListener { firebase.auth.getInstance().currentUser.delete()}
-        let document =  await firebase.db.collection('users')
-.doc(reclame && reclame.reclamerAt?.ownerId);
-firebase.auth.currentUser.uid(reclame && reclame.reclamerAt?.ownerId).delete();
-
-
-try {
-  await document.delete()
-      .then(() => {
-    return firebase.db.collection("User_reclamation").doc(id).update(obj)
-        })
-        toast("users deleted succesfuly!!");
-    props.history.push("/");
-  }
-
-
-
-
-
-     catch(err)  {
-            console.error("Error deleting document", err);
-          }
-        props.history.push("/");
-      }
      
     
 
   
+     async function bloc(){
+     
+        let document =  await firebase.db.collection('users')
+.doc(reclame && reclame.reclamerAt?.ownerId);
+      
+      
+        var fieldName = "blocked";
+        var obj = {};
+        obj[fieldName] = true;
+        
+        var field = "etat";
+        var objc = {};
+        objc[field] = "done";
+        
+         document.update(obj)
+        .then(function() {
+          return firebase.db.collection("User_reclamation").doc(id).update(objc);
+         
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error blocing document: ", error);
+        });
+
+        props.history.push("/NewReclamtion");   
+        
+      }
   
+   
+
 
   
   
@@ -116,7 +128,7 @@ try {
 {reclame && (
     <>   
   <IonItem> 
-    <IonButton onClick={userDelete}> delete user</IonButton>
+    <IonButton onClick={bloc}> bloc user</IonButton>
     <IonButton onClick={handleDeleteLink}> delete Ad</IonButton>
     <IonButton onClick={Send}> User warning </IonButton>
   </IonItem>

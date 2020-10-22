@@ -215,6 +215,7 @@ React.useEffect(() => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
    // Display the result in the element with id="demo"
+   if(post&&post?.etat==="NEW"){
    if( document.getElementById("demo")!==null){
   
    document.getElementById("demo").innerHTML =
@@ -250,7 +251,7 @@ React.useEffect(() => {
        }
   
       
-      }
+      }}
       
      
       
@@ -316,13 +317,24 @@ return (
         </IonFab>  
           </>
         )}
+         {post?.etat ==="NEW" && (
+ <>
    <div > Deadline:</div>     
 
 <div >
 
 <div >
             <p id="demo" />
-      </div></div>
+      </div></div> </>)}
+      {post?.etat ==="EXPIRED" && (
+ <>
+   <div > Deadline:</div>     
+
+<div >
+
+<div >
+            <p id="demo" />
+      </div></div> </>)}
 
 
           <div>

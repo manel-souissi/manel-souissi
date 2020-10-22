@@ -60,17 +60,17 @@ const LinkItem = ({ post}) => {
 )}
         
 
-              <IonCard  style={{
+        {post?.Price !=="" && (  <IonCard  style={{
             float: "left"
         }} className="link" >
               <div className="ion-padding-vertical ion-text-wrap">
-              {post?.Price !=="" && ( 
+             
                   <>
                   <p  className="content"> Price:</p>
                 <strong style={{ fontSize: "1rem" }}>
                   {post?.Price} dt</strong>     </>
-                  )}
-              </div></IonCard>
+                 
+              </div></IonCard> )}
               <div className="ion-padding-vertical ion-text-wrap"></div>
               <div className="ion-padding-vertical ion-text-wrap"></div>
               <div className="ion-padding-vertical ion-text-wrap"></div>

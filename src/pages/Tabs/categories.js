@@ -55,7 +55,7 @@ function handleSnapShot(snapshot) {
         </IonHeader></IonToolbar>
        
             
-   
+        <IonToolbar>
   
     
      <IonSegment  scrollable  value={cat} onIonChange={e => setCat(e.detail.value)} 
@@ -73,7 +73,7 @@ function handleSnapShot(snapshot) {
                </IonSegment>
     
     
-  
+               </IonToolbar>
    
    <IonContent>
         
